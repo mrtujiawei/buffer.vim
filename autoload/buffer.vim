@@ -22,24 +22,3 @@ func! buffer#only()
     endif
   endfor
 endfunc
-
-" 关闭当前buffer 不关闭窗口
-func! buffer#close()
-  let l:current_buf_num = bufnr("%")
-  let l:alternate_buf_num = bufnr("#")
-
-  if buflisted(l:alternate_buf_num)
-    buffer #
-  else
-    bnext
-  endif
-
-  if bufnr("%") == l:current_buf_num
-    new
-  endif
-
-  if buflisted(l:current_buf_num)
-    execute("bdelete! " . l:current_buf_num)
-  endif
-endfunc
-
